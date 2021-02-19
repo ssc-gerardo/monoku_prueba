@@ -1,7 +1,7 @@
 # monoku_prueba
 Prueba backend monoku
 
-query que regresa todas las canciones 
+# query que regresa todas las canciones 
 {
   allCanciones {
     id
@@ -9,3 +9,14 @@ query que regresa todas las canciones
     duracion
   }
 }
+
+# Mutacion que crea un artista
+mutation{
+  creaArtista(bandaId:2,nombre:"daft punk"){
+    artista{
+      id
+      nombre
+    }
+  }
+}
+
