@@ -85,7 +85,7 @@ class Query(graphene.ObjectType):
 
     def resolve_canciones_por_genero(root, info, genero):
         return Canciones.objects.filter(genero=genero)
-    
+
     def resolve_canciones_por_subgenero(root, info, subgenero):
         return Canciones.objects.filter(subgenero=subgenero)
 

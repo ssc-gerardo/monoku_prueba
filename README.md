@@ -20,3 +20,26 @@ mutation{
   }
 }
 
+# Query que regresa canciones filtradas por genero
+query{
+  cancionesPorGenero(genero:"genero"){
+    nombre
+    duracion
+    album {
+      id
+      
+    }
+  }
+}
+
+# Query que regresa canciones filtradas por subgenero
+query{
+  cancionesPorGenero(subgenero:"subgenero"){
+    nombre
+    duracion
+    album {
+      id
+      
+    }
+  }
+}
