@@ -7,7 +7,6 @@ from .models import Canciones, Banda, Album, Artista, Tag, \
 class CancionesTipos(DjangoObjectType):
     class Meta:
         model = Canciones
-        fields = ("id", "nombre", "duracion")
 
 
 class BandaTipos(DjangoObjectType):
@@ -55,6 +54,10 @@ class Query(graphene.ObjectType):
     subgeneros = graphene.List(SubGeneroTipos)
     tags = graphene.List(TagTipos)
     instrumentos = graphene.List(InstrumentoTipos)
+    canciones_por_genero = graphene.List(
+        CancionesTipos, genero=graphene.Int())
+    canciones_por_subgenero = graphene.List(
+        CancionesTipos, subgenero=graphene.Int())
 
     def resolve_canciones(root, info):
         return Canciones.objects.all()
@@ -68,7 +71,7 @@ class Query(graphene.ObjectType):
     def resolve_artistas(root, info):
         return Artista.objects.all()
 
-    def resolve_geberos(root, info):
+    def resolve_generos(root, info):
         return Genero.objects.all()
 
     def resolve_subgeneros(root, info):
@@ -79,6 +82,12 @@ class Query(graphene.ObjectType):
 
     def resolve_tags(root, info):
         return Tag.objects.all()
+
+    def resolve_canciones_por_genero(root, info, genero):
+        return Canciones.objects.filter(genero=genero)
+    
+    def resolve_canciones_por_subgenero(root, info, subgenero):
+        return Canciones.objects.filter(subgenero=subgenero)
 
 
 class CreaArtista(graphene.Mutation):
